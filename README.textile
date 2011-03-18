@@ -1,0 +1,9 @@
+h2. Installation
+
+<pre><code>gem install youdao_translate</code></pre>
+
+h2. Usage
+
+<pre><code>$ youdao hello</code></pre>
+Or
+<pre><code>$ youdao ruby is interesting</code></pre>
