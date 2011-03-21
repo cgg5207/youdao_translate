@@ -2,14 +2,11 @@
 
 require File.join(File.dirname(__FILE__), "..", "lib", "youdao_translate")
 
-case ARGV.length
-when 0
-  STDOUT.puts "You should input something to translate."
-when 1
-STDOUT.puts "1"
-  YoudaoTranslate::YoudaoWord.search(ARGV[0])
+include YoudaoTranslate
+options = Command.parse(ARGV)
+
+if options.sentence
+  STDOUT.puts(YoudaoSentence.search(ARGV.join(" ")))
 else
-STDOUT.puts ARGV.length
-YoudaoTranslate::YoudaoWord.search(ARGV[0])
-  #YoudaoTranslate::YoudaoSentence.search(ARGV.join(" "))
+  STDOUT.puts(YoudaoWord.search(ARGV.shift, basic = options.basic, web = options.web, power = options.power, bilingual = options.bilingual, original = options.original, baike = options.baike, language = options.language || "eng"))
 end

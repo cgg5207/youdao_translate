@@ -8,7 +8,7 @@ module YoudaoTranslate
       options = OpenStruct.new
 
       opts = OptionParser.new do |opts|
-        opts.banner = "Usage: example.rb [options]"
+        opts.banner = "Usage: "
 
         opts.on_tail("-h", "--help", "Show this message") do
           puts opts
@@ -21,7 +21,7 @@ module YoudaoTranslate
         end
 
         options.language = "eng"
-        opts.on("-l", "--language OPT", ["eng", "fr", "chn"], "Set language,default english") do |language|
+        opts.on("-l", "--language OPT", ["eng", "fr", "chn"], "Set language, default english") do |language|
           options.language = language
         end
 
@@ -34,11 +34,16 @@ module YoudaoTranslate
         opts.on("-k", "--baike", " ") do
           options.baike = true
         end
+
+        options.sentence = false
+        opts.on("-s", "--sentence", " ") do
+          options.sentence = true
+        end
+
       end
 
       opts.parse!(args)
       options
     end
-
   end
 end
