@@ -9,4 +9,3 @@ require "version"
 require "command"
 require "youdao_word"
 require "youdao_sentence"
-

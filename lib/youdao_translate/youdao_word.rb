@@ -2,14 +2,14 @@
 module YoudaoTranslate
   class YoudaoWord
     include Command
-    ATTRIBUTES = { "Standard" => 0, "Bold" => 1, "Reverse" => 2 }
-    COLORS = { "Black" => 30, "Red" => 31, "Green" => 32, "Yellow" => 33, "Blue" => 34, "Magenta" => 35, "Cyan" => 36,  "White" => 37 }
+    ATTRIBUTES = {"Standard" => 0, "Bold" => 1, "Reverse" => 2}
+    COLORS = {"Black" => 30, "Red" => 31, "Green" => 32, "Yellow" => 33, "Blue" => 34, "Magenta" => 35, "Cyan" => 36, "White" => 37}
 
     def self.search(q, options)
       path = "http://dict.youdao.com/search?le=#{options[:language]}&q=#{CGI.escape(q)}&ue=utf8"
       page = Nokogiri::HTML(open(path))
 
-      page.css("p.via", "p.example-via").each{ |element| element.remove }
+      page.css("p.via", "p.example-via").each { |element| element.remove }
 
       if options[:basic]
         announce_area = page.at("#results .trans-wrapper h2")
@@ -107,7 +107,7 @@ module YoudaoTranslate
     end
 
     def self.set_color(header, text, color, bold = false)
-      text = text.is_a?(Array) ? text.each{|t| t.gsub!(/\n\s+/, " ")}.join("\n") : text.gsub!(/\n\s+/, " ")
+      text = text.is_a?(Array) ? text.each { |t| t.gsub!(/\n\s+/, " ") }.join("\n") : text.gsub!(/\n\s+/, " ")
 
       bold = bold ? ATTRIBUTES["Bold"] : ATTRIBUTES["Standard"]
       color = COLORS[color.to_s.capitalize] || COLORS["Green"]
