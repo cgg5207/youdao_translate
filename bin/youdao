@@ -3,10 +3,19 @@
 require File.join(File.dirname(__FILE__), "..", "lib", "youdao_translate")
 
 include YoudaoTranslate
+
 options = Command.parse(ARGV)
 
 if options.sentence
-  STDOUT.puts(YoudaoSentence.search(ARGV.join(" ")))
+  YoudaoSentence.search(ARGV.join(" "))
 else
-  STDOUT.puts(YoudaoWord.search(ARGV.shift, basic = options.basic, web = options.web, power = options.power, bilingual = options.bilingual, original = options.original, baike = options.baike, language = options.language || "eng"))
+  YoudaoWord.search(ARGV.shift || "english",
+    {
+      :basic => options.basic,
+      :web => options.web, :phrase => options.phrase, :synonym => options.synonym,
+      :powertrans => options.powertrans, :eetrans => options.eetrans,
+      :bilingual => options.bilingual, :original => options.original, :authority => options.authority,
+      :baike => options.baike,
+      :language => options.language || "eng"
+    })
 end
