@@ -106,7 +106,7 @@ module YoudaoTranslate
       end
     end
 
-    def self.set_color(header, text, color, bold = true)
+    def self.set_color(header, text, color, bold = false)
       text = text.is_a?(Array) ? text.each{|t| t.gsub!(/\n\s+/, " ")}.join("\n") : text.gsub!(/\n\s+/, " ")
 
       bold = bold ? ATTRIBUTES["Bold"] : ATTRIBUTES["Standard"]
