@@ -21,14 +21,14 @@ module YoudaoTranslate
           options.basic = false
         end
 
-        options.phrase = false
-        opts.on("-r", "--phrase", "词组短语") do
-          options.phrase = true
+        options.phrases = false
+        opts.on("-r", "--phrases", "词组短语") do
+          options.phrases = true
         end
 
-        options.synonym = false
-        opts.on("-n", "--synonym", "近义词") do
-          options.synonym = true
+        options.synonyms = false
+        opts.on("-n", "--synonyms", "近义词") do
+          options.synonyms = true
         end
 
         options.language = "eng"
@@ -51,19 +51,19 @@ module YoudaoTranslate
           options.eetrans = true
         end
 
-        options.bilingual = false
-        opts.on("-g", "--bilingual", "双语例句") do
-          options.bilingual = true
+        options.bilinguals = false
+        opts.on("-g", "--bilinguals", "双语例句") do
+          options.bilinguals = true
         end
 
-        options.original = false
-        opts.on("-o", "--original", "原声例句") do
-          options.original = true
+        options.original_sounds = false
+        opts.on("-o", "--original_sounds", "原声例句") do
+          options.original_sounds = true
         end
 
-        options.authority = false
-        opts.on("-a", "--authority", "权威例句") do
-          options.authority = true
+        options.authority_trans = false
+        opts.on("-a", "--authority_trans", "权威例句") do
+          options.authority_trans = true
         end
 
         options.baike = false

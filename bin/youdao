@@ -9,13 +9,5 @@ options = Command.parse(ARGV)
 if options.sentence
   YoudaoSentence.search(ARGV.join(" "))
 else
-  YoudaoWord.search(ARGV.shift || "english",
-    {
-      :basic => options.basic,
-      :web => options.web, :phrase => options.phrase, :synonym => options.synonym,
-      :powertrans => options.powertrans, :eetrans => options.eetrans,
-      :bilingual => options.bilingual, :original => options.original, :authority => options.authority,
-      :baike => options.baike,
-      :language => options.language || "eng"
-    })
+  YoudaoWord.search(ARGV.shift || "english", parse_ostruct_to_hash(options))
 end
