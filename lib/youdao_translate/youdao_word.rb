@@ -7,9 +7,10 @@ module YoudaoTranslate
     attr_reader :page
 
     def self.search(q, options)
-      path = "http://dict.youdao.com/search?le=#{options[:language]}&q=#{CGI.escape(q)}&ue=utf8"
+      path = "http://dict.youdao.com/search?le=#{options["language"]}&q=#{CGI.escape(q)}&ue=utf8"
       original_page = Nokogiri::HTML(open(path))
       original_page.css("p.via", "p.example-via").each { |element| element.remove }
+
       instance = new
       instance.instance_variable_set("@page", original_page)
 
@@ -42,7 +43,7 @@ module YoudaoTranslate
 
     def get_phrases
       phrases = []
-      phrase_area = page.css("#results #eTransform #transformToggle #wordGroup p.wordGroup")
+      phrase_area = page.css("#results #eTransform #wordGroup.trans-container p.wordGroup")
       phrase_area && phrase_area.each do |pa|
         phrases << pa.text
       end
@@ -51,7 +52,8 @@ module YoudaoTranslate
 
     def get_synonyms
       synonyms = []
-      synonyms_area = page.css("#results #eTransform #synonyms ul li")
+      path = "#results #eTransform #synonyms.trans-container ul"
+      synonyms_area = page.css(path + " li", path + " .wordGroup")
       synonyms_area && synonyms_area.each do |sa|
         synonyms << sa.text
       end
@@ -106,7 +108,6 @@ module YoudaoTranslate
     def get_authority_trans
       authority_trans = []
       authority_trans_area = page.css("#results #examples #authority ul li p:nth-child(odd)")
-      p page.css("#results #examples #authority ul li")
       authority_trans_area && authority_trans_area.each do |at|
         authority_trans << at.text
       end
